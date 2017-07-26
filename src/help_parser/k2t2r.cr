@@ -18,7 +18,7 @@ module HelpParser
   def self.t2r(specs : TokensHash) : RegexHash | Nil
     if types = specs[TYPES]?
       t2r = RegexHash.new
-      specs[TYPES].each do |pair|
+      types.each do |pair|
         type, pattern = pair.as(Array(Token))
         begin
           t2r[type.as(String)] = Regex.new(pattern.as(String)[1..-2])
