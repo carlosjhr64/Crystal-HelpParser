@@ -101,3 +101,10 @@ Feature: Testing examples/bad_help
     * Then exit status is "78"
     * Then stderr is "Uncompleted types definition: EXTRA"
     * Then stdout is ""
+
+  Scenario: 14
+    * Given option "14"
+    * When we run command
+    * Then exit status is "78"
+    * Then stderr is "Duplicate flag: n"
+    * Then stdout is ""

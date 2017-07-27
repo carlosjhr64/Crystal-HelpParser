@@ -79,4 +79,12 @@ module HelpParser
       raise SoftwareError.new("Unrecognized key: #{k}")
     end
   end
+
+  macro f2k(f)
+    ({{f.id}}[1]=='-')? {{f.id}}[2..(({{f.id}}.index('=')||0)-1)] : {{f.id}}[1]
+  end
+
+  macro f2s(f)
+    ({{f.id}}[1]=='-')? {{f.id}}[2..(({{f.id}}.index('=')||0)-1)] : {{f.id}}.lchop
+  end
 end

@@ -179,10 +179,22 @@ Types:
   PHONE  /^\\d+-\\d+-\\d+$/
 HELP
 
+# duplicate flag n
+HELP14 = <<-HELP
+Usage:
+  #{PN} [:options+] <arg1> <arg2>
+  #{PN} [:options+] <args>+
+Options:
+  -n --number=NUMBER 1
+  --n
+Types:
+  NUMBER /^\\d+$/
+HELP
+
 HELPS = [
   HELP0, HELP1, HELP2, HELP3, HELP4, HELP5,
   HELP6, HELP7, HELP8, HELP9, HELP10,
-  HELP11, HELP12, HELP13
+  HELP11, HELP12, HELP13, HELP14
 ]
 
 N = (ARGV.size>0)? ARGV[0].to_i : 0

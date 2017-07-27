@@ -58,10 +58,7 @@ module HelpParser
   macro validate_usage_specs
     {% if !flag?(:release) %}
       option_specs = specs.select{|a,b| !(a==USAGE || a==TYPES)}
-      flags = option_specs.values.flatten.select{|s|s[0]=='-'}.map{|s|s.lstrip('-')}.map do |s|
-        i = s.index('=')
-        (i)? s[0..(i-1)] : s
-      end
+      flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{|f|HelpParser.f2s(f)}
       flags.each_with_index do |flag,i|
         raise HelpError.new("Duplicate flag: "+flag) unless i==flags.rindex(flag)
       end   

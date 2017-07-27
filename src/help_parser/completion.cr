@@ -97,9 +97,7 @@ module HelpParser
           group,plus = m["k"],m["p"]?
           key = keys[i]?
           raise NoMatch.new if key.nil? || key.is_a?(UInt8)
-          list = @specs[group].flatten.select{|f|f[0]=='-'}.map{|f|
-            (f[1]=='-')? f[2..((f.index('=')||0)-1)] : f[1]
-          }
+          list = @specs[group].flatten.select{|f|f[0]=='-'}.map{|f| HelpParser.f2k(f)}
           raise NoMatch.new unless list.includes?(key)
           unless plus.nil?
             loop do
