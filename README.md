@@ -33,10 +33,10 @@ has as familiar text.
     VERSION = "5.0.0"
 
     # Macros:
-    HelpParser.string(name)  # for options.name   : String
-    HelpParser.strings(args) # for options.args   : Array(String)
-    HelpParser.float(value)  # for options.value  : Float
-    HelpParser.int?(number)  # for options.number : Int32 | Nil
+    HelpParser.string(name)  # for options.name    : String
+    HelpParser.strings(args) # for options.args    : Array(String)
+    HelpParser.float(value)  # for options.value   : Float
+    HelpParser.int?(number)  # for options.number? : Int32 | Nil
 
     HelpParser.new(VERSION, HELP) do |options|
       hash = options._hash
