@@ -11,7 +11,7 @@ require "./help_parser/options"
 require "./help_parser/macros"
 
 module HelpParser
-  VERSION = "5.0.0"
+  VERSION = "5.1.0"
 
   def self.[](
     version : String | Nil  = nil,

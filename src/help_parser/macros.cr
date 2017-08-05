@@ -170,4 +170,28 @@ module HelpParser
       end
     end
   end
+
+  macro sbool?(*names)
+    module HelpParser
+      class Options
+        {% for name in names %}
+          def {{name.id}}? : Bool
+            @hash.has_key?("{{name.id}}")
+          end
+        {% end %}
+      end
+    end
+  end
+
+  macro cbool?(*names)
+    module HelpParser
+      class Options
+        {% for name in names %}
+          def {{name.id}}? : Bool
+            @hash.has_key?('{{name.id}}')
+          end
+        {% end %}
+      end
+    end
+  end
 end
