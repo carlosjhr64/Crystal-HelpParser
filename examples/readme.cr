@@ -13,6 +13,8 @@ Options:
   --number 5         \t Defaulted
   --value=FLOAT 1.23 \t Typed and Defaulted
   -a --all=YN y      \t Short, long, typed, and defaulted
+  -b
+  --bool
 Alternate:
   -V                 \t Just short
 Types:
@@ -21,13 +23,15 @@ Types:
   YN    /^[YNyn]$/
 HELP
 
-VERSION = "5.0.0"
+VERSION = "5.1.1"
 
 # Macros:
 HelpParser.string(name)  # for options.name   : String
 HelpParser.strings(args) # for options.args   : Array(String)
 HelpParser.float(value)  # for options.value  : Float
 HelpParser.int?(number)  # for options.number : Int32 | Nil
+HelpParser.sbool?(bool)  # for options.bool?  : Bool
+HelpParser.cbool?(b)     # for options.b?     : Bool
 
 HelpParser.new(VERSION, HELP, ["awesome"]+ARGV) do |options|
   hash = options._hash
@@ -37,4 +41,6 @@ HelpParser.new(VERSION, HELP, ["awesome"]+ARGV) do |options|
   pp options.args  if hash["args"]?
   pp options.value if hash["value"]?
   pp options.number?
+  pp options.bool?
+  pp options.b?
 end

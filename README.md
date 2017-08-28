@@ -32,7 +32,7 @@ has as familiar text.
       YN    /^[YNyn]$/
     HELP
 
-    VERSION = "5.1.0"
+    VERSION = "5.1.1"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -50,6 +50,8 @@ has as familiar text.
       pp options.args  if hash["args"]?
       pp options.value if hash["value"]?
       pp options.number?
+      pp options.bool?
+      pp options.b?
     end
 
 YES!!!

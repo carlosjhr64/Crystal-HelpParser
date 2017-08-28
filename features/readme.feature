@@ -15,14 +15,14 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "5.0.0"
+    * Then stdout is "5.1.1"
 
   Scenario: --version
     * Given option "--version"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "5.0.0"
+    * Then stdout is "5.1.1"
 
   Scenario: -h
     * Given option "-h"
@@ -55,20 +55,24 @@ Feature: Testing examples/readme
   # options.args # => ["one", "two", "three"]
   # options.value # => 1.23
   # options.number? # => 5
+  # options.bool? # => false
+  # options.b? # => false
     * Given option "-s --name=Joe --number --value -a one two three"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "4c1c7be2886d51d8c1b8d4a6a2ec1978"
+    * Then digest is "087207eb1e795a192ec3ce79e0015a7a"
 
   Scenario: Second Usage
   # hash # => {0 => "awesome", 'V' => true, 1 => "Joe", "arg" => "Joe"}
   # options.number? # => nil
+  # options.bool? # => false
+  # options.b? # => false
     * Given option "-V Joe"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "4fbb7c9137b35c1f2ac609c015e232f8"
+    * Then digest is "73ab35edf22d0b12784668ab27e077b2"
 
   Scenario: -s --long synonyms
     * Given option "-s --long synonyms"
