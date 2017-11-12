@@ -85,7 +85,7 @@ Feature: Testing examples/readme
     * Given option "--name=joe uncapped name"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Not a NAME: name"
+    * Then stderr is "--name=joe !~ NAME=/^[A-Z][a-z]+$/"
     * Then stdout is ""
 
   Scenario: --name missing

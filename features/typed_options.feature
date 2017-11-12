@@ -28,7 +28,7 @@ Feature: Testing examples/typed_options
     * Given option "--number=1.23"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Not a NUMBER: number"
+    * Then stderr is "--number=1.23 !~ NUMBER=/^\d+$/"
     * Then stdout is ""
 
   Scenario: --number=456

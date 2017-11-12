@@ -32,7 +32,7 @@ has as familiar text.
       YN    /^[YNyn]$/
     HELP
 
-    VERSION = "5.1.1"
+    VERSION = "5.2.0"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String

@@ -33,10 +33,10 @@ module HelpParser
             regex = t2r[type]
             case value
             when String
-              raise UsageError.new("Not a #{type}: #{key}") unless value=~regex
+              raise UsageError.new("--#{key}=#{value} !~ #{type}=#{regex.inspect}") unless value=~regex
             when Strings
               value.each do |string|
-                raise UsageError.new("Not a #{type}: #{key}") unless string=~regex
+                raise UsageError.new("--#{key}=#{string} !~ #{type}=#{regex.inspect}") unless string=~regex
               end
             else
               raise UsageError.new("Need a #{type}: #{key}")
