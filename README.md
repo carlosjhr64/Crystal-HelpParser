@@ -1,16 +1,16 @@
-# Help Parser V: Infamous
+# Help Parser VI: Tweeker
 
-All help is about to get parsed...
-Again!!!
-
-And this time,
-the battle between complexity and simplicity
-has as familiar text.
+Welcome to the best Help Parser of all!
+Tweeker!
+Which do you find most helpful?
+Hard?
+I prefer easy.
 
     require "help_parser"
 
     HELP = <<-HELP
-    The Awesome Command.
+    # <= Hash here, parser skips
+    # The Awesome Command.
     Usage:
       awesome [:options+] <args>+
       awesome :alternate <arg=NAME>
@@ -30,9 +30,14 @@ has as familiar text.
       NAME  /^[A-Z][a-z]+$/
       FLOAT /^\\d+\\.\\d+$/
       YN    /^[YNyn]$/
+    Exclusive:
+      version help       \t Tells parser these are exclusive keys
+    # <= Hash here, parser breaks out
+    # Notes #
+    Blah blah blah
     HELP
 
-    VERSION = "5.2.0"
+    VERSION = "6.0.0"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -54,4 +59,5 @@ has as familiar text.
       pp options.b?
     end
 
-YES!!!
+Well, what do you think?
+PERFECT!
