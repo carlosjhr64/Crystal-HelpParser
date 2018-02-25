@@ -39,13 +39,13 @@ Feature: Testing examples/readme
     * Then header is "The Awesome Command."
 
   Scenario: First Usage
-  # hash # => {0 => "awesome",
+  # hash # => {0_u8 => "awesome",
   #            's' => true,
   #            "name" => "Joe",
   #            'a' => true,
-  #            1 => "one",
-  #            2 => "two",
-  #            3 => "three",
+  #            1_u8 => "one",
+  #            2_u8 => "two",
+  #            3_u8 => "three",
   #            "args" => ["one", "two", "three"],
   #            "long" => true,
   #            "number" => "5",
@@ -61,10 +61,10 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "087207eb1e795a192ec3ce79e0015a7a"
+    * Then digest is "7d1ef3d365cd15f5281d816eccd0227f"
 
   Scenario: Second Usage
-  # hash # => {0 => "awesome", 'V' => true, 1 => "Joe", "arg" => "Joe"}
+  # hash # => {0_u8 => "awesome", 'V' => true, 1_u8 => "Joe", "arg" => "Joe"}
   # options.number? # => nil
   # options.bool? # => false
   # options.b? # => false
@@ -72,7 +72,7 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "73ab35edf22d0b12784668ab27e077b2"
+    * Then digest is "ad6bbb25406605edd7c1c8a836d082b2"
 
   Scenario: -s --long synonyms
     * Given option "-s --long synonyms"
