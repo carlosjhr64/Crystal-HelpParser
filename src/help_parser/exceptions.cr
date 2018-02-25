@@ -3,8 +3,8 @@ module HelpParser
     @code = 1
 
     # Must give message
-    def initialize(message : String)
-      super
+    def initialize(message : String, *keys)
+      keys.size==0 ? super(message) : super("#{message}:  #{keys.join(" ")}")
     end
 
     def exit
@@ -26,25 +26,25 @@ module HelpParser
   end
 
   class UsageError < HelpParserException
-    @code = 64 # EX_USAGE
+    @code = EX_USAGE
   end
 
   class SoftwareError < HelpParserException
     # Stuff that should not happen
-    @code = 70 # EX_SOFTWARE
+    @code = EX_SOFTWARE
   end
 
   class NoMatch < HelpParserException
     # used to shortcircuit out
-    @code = 70 # EX_SOFTWARE
+    @code = EX_SOFTWARE
 
     # Forces it's owm message
     def initialize
-      super("Software Error: NoMatch was not caught by HelpParser.")
+      super(NO_MATCH)
     end
   end
 
   class HelpError < HelpParserException
-    @code = 78 # EX_CONFIG
+    @code = EX_CONFIG
   end
 end

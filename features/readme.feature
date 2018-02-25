@@ -78,7 +78,7 @@ Feature: Testing examples/readme
     * Given option "-s --long synonyms"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Option s is a synonym for long."
+    * Then stderr is "Redundant:  s long"
     * Then stdout is ""
 
   Scenario: --name=joe uncapped name
@@ -99,4 +99,4 @@ Feature: Testing examples/readme
     * Given option "--number=BAD number"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "number not an Integer."
+    * Then stderr is "Not an Integer:  number"

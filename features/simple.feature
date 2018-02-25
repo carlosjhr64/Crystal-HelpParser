@@ -31,5 +31,5 @@ Feature: Testing examples/simple
     * Given option "-s --long"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Option s is a synonym for long."
+    * Then stderr is "Redundant:  s long"
     * Then stdout is ""

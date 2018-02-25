@@ -8,7 +8,7 @@ module HelpParser
 
     def usage
       @specs[USAGE].each do |cmd|
-        raise SoftwareError.new("Expected Tokens from @specs[USAGE].") unless cmd.is_a?(Tokens)
+        raise SoftwareError.new(EXPECTED_TOKENS) unless cmd.is_a?(Tokens)
         begin
           i = matches(cmd)
           raise NoMatch.new unless @hash.size==i
@@ -20,7 +20,7 @@ module HelpParser
           @cache.clear
         end
       end
-      raise UsageError.new("Please match usage.")
+      raise UsageError.new(MATCH_USAGE)
     end
 
     def types
@@ -59,7 +59,7 @@ module HelpParser
               short,long = first[1],second[2..(i-1)]
               if @hash.has_key?(short)
                 if @hash.has_key?(long)
-                  raise UsageError.new("Option #{short} is a synonym for #{long}.")
+                  raise UsageError.new(REDUNDANT, short, long)
                 end
                 @hash[long] = (default.nil?) ? true : default.as(String)
               elsif value = @hash[long]?

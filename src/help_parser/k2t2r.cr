@@ -9,7 +9,7 @@ module HelpParser
         HelpParser.validate_consistent_variables
       else
         # Expected these to be caught earlier...
-        raise SoftwareError.new("Unexpected string in help text: "+token)
+        raise SoftwareError.new(UNEXPECTED, token)
       end
     end
     return k2t
@@ -23,7 +23,7 @@ module HelpParser
         begin
           t2r[type.as(String)] = Regex.new(pattern.as(String)[1..-2])
         rescue ArgumentError
-          raise HelpError.new("Bad regex for #{type}: #{pattern}")
+          raise HelpError.new(BAD_REGEX, type, pattern)
         end
       end
       return t2r

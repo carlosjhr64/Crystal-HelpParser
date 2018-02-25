@@ -2,13 +2,13 @@ private macro hash_class(name, key, value)
   class {{name.id}} < Hash({{key.id}}, {{value.id}})
     def []=(k : {{key.id}}, v : {{value.id}})
       {% if !flag?(:release) %}
-        raise HelpError.new("Duplicate key: #{k}") if self.has_key?(k)
+        raise HelpError.new(DUP_KEY,k) if self.has_key?(k)
       {% end %}
       super
     end
 
     def []=(k, v)
-      raise SoftwareError.new("Unrecognized mapping: #{k} => #{v}")
+      raise SoftwareError.new(UNRECOGNIZED_MAP, k, v)
     end
   end
 end
@@ -29,7 +29,7 @@ module HelpParser
 
   class ArgvHash < Hash(ArgvKey, ArgvValue)
     private macro nodupkey(k) # No duplicate keys allowed in argv
-      raise UsageError.new("Duplicate key: #{ {{k.id}} }") if self.has_key?( {{k.id}} )
+      raise UsageError.new(DUP_KEY, {{k.id}} ) if self.has_key?( {{k.id}} )
     end
 
     # UInt8 => String
@@ -73,10 +73,10 @@ module HelpParser
     end
 
     def []=(k, v)
-      raise SoftwareError.new("Unrecognized mapping: #{k} => #{v}")
+      raise SoftwareError.new(UNRECOGNIZED_MAP, k, v)
     end
     def [](k)
-      raise SoftwareError.new("Unrecognized key: #{k}")
+      raise SoftwareError.new(UNRECOGNIZED_KEY, k)
     end
   end
 
