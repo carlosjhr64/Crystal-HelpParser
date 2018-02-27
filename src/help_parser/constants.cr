@@ -1,6 +1,7 @@
 module HelpParser
   USAGE = "usage"
   TYPES = "types"
+  EXCLUSIVE = "exclusive"
 
   # usage
   FLAG       = /^[-][-]?(?<k>\w+)$/
@@ -16,6 +17,9 @@ module HelpParser
   SHORT_LONG         = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)$/
   SHORT_LONG_DEFAULT = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)(=(?<t>[A-Z]+))?,?\s+(?<d>[^-\s]\S*)$/
 
+  # spec w+( w+)+
+  X_DEF = /^\w+( +\w+)+$/
+
   # spec W+ /~/
   TYPE_DEF = /^(?<t>[A-Z]+),?\s+\/(?<r>\S+)\/$/
 
@@ -29,15 +33,18 @@ module HelpParser
   DUP_KEY             = "Duplicate key"
   DUP_WORD            = "Duplicate word"
   DUP_FLAG            = "Duplicate flag"
+  UNSEEN_FLAG         = "Undefined flag"
   INCONSISTENT        = "Inconsistent use of variable"
   UNEXPECTED          = "Unexpected string in help text"
   BAD_REGEX           = "Bad regex"
   REDUNDANT           = "Redundant"
+  EXCLUSIVE_KEYS      = "Exclusive keys"
   UNBALANCED          = "Unbalanced brackets"
   UNRECOGNIZED_KEY    = "Unrecognized key"
   UNRECOGNIZED_MAP    = "Unrecognized mapping"
   UNRECOGNIZED_TOKEN  = "Unrecognized usage token"
   UNRECOGNIZED_TYPE   = "Unrecognized type spec"
+  UNRECOGNIZED_X      = "Unrecognized exclusive spec"
   UNRECOGNIZED_OPTION = "Unrecognized option spec"
   UNDEFINED_SECTION   = "Section not defined"
   MISSING_CASES       = "Missing cases"

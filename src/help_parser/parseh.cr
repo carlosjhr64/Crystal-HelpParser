@@ -12,11 +12,15 @@ module HelpParser
         next if !(line[0]==' ')
         spec = (index=line.rindex('\t'))? line[0,index].strip : line.strip
         HelpParser.validate_no_extraneous_spaces
-        if name==USAGE
+        case name
+        when USAGE
           HelpParser.validate_usage_spec
           specs[name].push HelpParser.parseu spec
-        elsif name==TYPES
+        when TYPES
           HelpParser.validate_type_spec
+          specs[name].push spec.split(CSV).map{|s| s.as(Token)}
+        when EXCLUSIVE
+          HelpParser.validate_x_spec
           specs[name].push spec.split(CSV).map{|s| s.as(Token)}
         else
           HelpParser.validate_option_spec

@@ -44,6 +44,12 @@ module HelpParser
     {% end %}
   end
 
+  macro validate_x_spec
+    {% if !flag?(:release) %}
+      raise HelpError.new(UNRECOGNIZED_X, spec) unless spec=~X_DEF
+    {% end %}
+  end
+
   macro validate_option_spec
     {% if !flag?(:release) %}
       case spec
@@ -57,8 +63,16 @@ module HelpParser
 
   macro validate_usage_specs
     {% if !flag?(:release) %}
-      option_specs = specs.select{|a,b| !(a==USAGE || a==TYPES)}
+      option_specs = specs.select{|a,b| !HelpParser.reserved(a)}
       flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{|f|HelpParser.f2s(f)}
+      exclusive = specs[EXCLUSIVE]?
+      unless exclusive.nil?
+        exclusive.each do |xs|
+          xs.as(Tokens).each do |x|
+            raise HelpError.new(UNSEEN_FLAG, x) unless flags.includes?(x)
+          end
+        end
+      end
       flags.each_with_index do |flag,i|
         raise HelpError.new(DUP_FLAG, flag) unless i==flags.rindex(flag)
       end   
@@ -75,7 +89,7 @@ module HelpParser
       end
       specs.each do |key,tokens|
         raise HelpError.new(MISSING_CASES, key) unless tokens.size>0
-        next if specs_usage.nil? || key==USAGE || key==TYPES
+        next if specs_usage.nil? || HelpParser.reserved(key)
         raise HelpError.new(MISSING_USAGE, key) unless group.includes?(key)
       end
     {% end %}
