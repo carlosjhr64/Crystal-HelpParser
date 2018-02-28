@@ -92,7 +92,7 @@ Feature: Testing examples/readme
     * Given option "--name missing"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Need a NAME: name"
+    * Then stderr is "--name !~ NAME=/^[A-Z][a-z]+$/"
     * Then stdout is ""
 
   Scenario: --number=BAD number

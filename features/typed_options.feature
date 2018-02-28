@@ -14,7 +14,7 @@ Feature: Testing examples/typed_options
     * Given option "--float"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Need a FLOAT: float"
+    * Then stderr is "--float !~ FLOAT=/^\d+\.\d+$/"
     * Then stdout is ""
 
   Scenario: --float=1.23

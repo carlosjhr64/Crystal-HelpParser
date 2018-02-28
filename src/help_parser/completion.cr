@@ -39,7 +39,7 @@ module HelpParser
                 raise UsageError.new("--#{key}=#{string} !~ #{type}=#{regex.inspect}") unless string=~regex
               end
             else
-              raise UsageError.new("Need a #{type}: #{key}")
+              raise UsageError.new("--#{key} !~ #{type}=#{regex.inspect}")
             end
           end
         end
