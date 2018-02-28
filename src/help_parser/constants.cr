@@ -17,11 +17,11 @@ module HelpParser
   SHORT_LONG         = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)$/
   SHORT_LONG_DEFAULT = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)(=(?<t>[A-Z]+))?,?\s+(?<d>[^-\s]\S*)$/
 
-  # spec w+( w+)+
-  X_DEF = /^\w+( +\w+)+$/
-
   # spec W+ /~/
   TYPE_DEF = /^(?<t>[A-Z]+),?\s+\/(?<r>\S+)\/$/
+
+  # spec w+( w+)+
+  X_DEF = /^\w+( +\w+)+$/
 
   CSV = /,?\s+/
 
@@ -30,6 +30,7 @@ module HelpParser
   EX_SOFTWARE = 70
   EX_CONFIG   = 78
 
+  # error messages, partials:
   DUP_KEY             = "Duplicate key"
   DUP_WORD            = "Duplicate word"
   DUP_FLAG            = "Duplicate flag"
@@ -58,9 +59,9 @@ module HelpParser
   NOT_FLOATS          = "Not all Floats"
   NOT_INTEGER         = "Not an Integer"
   NOT_INTEGERS        = "Not all Integers"
-
+  # error messages, full:
   NO_MATCH            = "Software Error: NoMatch was not caught by HelpParser."
-  EXPECTED_TOKENS     = "Expected Tokens from @specs[USAGE]."
   MATCH_USAGE         = "Please match usage."
   EXTRANEOUS_SPACES   = "Extraneous spaces in help."
+  EXPECTED_TOKENS     = "Expected Tokens from @specs[USAGE]."
 end

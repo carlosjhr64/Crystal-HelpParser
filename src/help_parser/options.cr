@@ -10,8 +10,8 @@ module HelpParser
         raise VersionException.new(version)
       end
       if help
+        # -h or --help
         if @hash.has_key?('h') || @hash.has_key?("help")
-          # -h or --help
           raise HelpException.new(help)
         end
         specs = HelpParser.parseh(help)
