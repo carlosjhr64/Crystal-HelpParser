@@ -33,6 +33,7 @@ module HelpParser
   DUP_KEY             = "Duplicate key"
   DUP_WORD            = "Duplicate word"
   DUP_FLAG            = "Duplicate flag"
+  DUP_X               = "Duplicate exclusive spec"
   UNSEEN_FLAG         = "Undefined flag"
   INCONSISTENT        = "Inconsistent use of variable"
   UNEXPECTED          = "Unexpected string in help text"

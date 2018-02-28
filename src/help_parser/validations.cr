@@ -67,8 +67,13 @@ module HelpParser
       flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{|f|HelpParser.f2s(f)}
       exclusive = specs[EXCLUSIVE]?
       unless exclusive.nil?
+        seen = Hash(String,Bool).new
         exclusive.each do |xs|
-          xs.as(Tokens).each do |x|
+          xs = xs.as(Tokens)
+          k = xs.sort{|a,b|a.to_s<=>b.to_s}.join(" ")
+          raise HelpError.new(DUP_X,k) if seen[k]?
+          seen[k] = true
+          xs.each do |x|
             raise HelpError.new(UNSEEN_FLAG, x) unless flags.includes?(x)
           end
         end

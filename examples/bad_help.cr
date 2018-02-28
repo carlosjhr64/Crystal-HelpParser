@@ -191,10 +191,39 @@ Types:
   NUMBER /^\\d+$/
 HELP
 
+#
+HELP15 = <<-HELP
+Usage:
+  #{PN} [:options+] <arg1>
+Options:
+  -a
+  -b
+Exclusive:
+  a b
+  b a
+HELP
+
+# But this one is good!
+HELP16 = <<-HELP
+Usage:
+  #{PN} [:options+] <arg1>
+Options:
+  --ab
+  --bc
+  -a
+  -c
+Exclusive:
+  ab c
+  bc a
+# Note: #
+# This one is actually OK!
+HELP
+
 HELPS = [
   HELP0, HELP1, HELP2, HELP3, HELP4, HELP5,
   HELP6, HELP7, HELP8, HELP9, HELP10,
-  HELP11, HELP12, HELP13, HELP14
+  HELP11, HELP12, HELP13, HELP14, HELP15,
+  HELP16
 ]
 
 N = (ARGV.size>0)? ARGV[0].to_i : 0
