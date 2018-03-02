@@ -14,8 +14,11 @@ module HelpParser
         HelpParser.validate_no_extraneous_spaces
         case name
         when USAGE
-          HelpParser.validate_usage_spec
-          specs[name].push HelpParser.parseu spec
+          chars = spec.chars
+          HelpParser.validate_line_chars
+          tokens = HelpParser.parseu(chars)
+          HelpParser.validate_usage_tokens
+          specs[name].push tokens
         when TYPES
           HelpParser.validate_type_spec
           specs[name].push spec.split(CSV).map{|s| s.as(Token)}

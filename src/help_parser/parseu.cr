@@ -17,12 +17,4 @@ module HelpParser
     tokens.push(token) unless token==""
     return tokens
   end
-
-  def self.parseu(line : String) : Tokens
-    chars = line.chars
-    HelpParser.validate_line_chars
-    tokens = HelpParser.parseu(chars)
-    HelpParser.validate_usage_tokens
-    return tokens
-  end
 end

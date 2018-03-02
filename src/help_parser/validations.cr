@@ -10,7 +10,7 @@ module HelpParser
         end
         break if count<0
       end
-      raise HelpError.new(UNBALANCED, line) unless count==0
+      raise HelpError.new(UNBALANCED, spec) unless count==0
     {% end %}
   end
 
@@ -28,13 +28,6 @@ module HelpParser
       words.each_with_index do |word,i|
         raise HelpError.new(DUP_WORD, word) unless i==words.rindex(word)
       end
-    {% end %}
-  end
-
-  macro validate_usage_spec
-    {% if !flag?(:release) %}
-      # TODO: Symmetry demands this macro,
-      # but I can't think of any help text errors I'm not already catching.
     {% end %}
   end
 
