@@ -24,7 +24,7 @@ Feature: Testing examples/simple
     * Given option "-q not good"
     * When we run command
     * Then exit status is "64"
-    * Then stderr is "Please match usage."
+    * Then stderr is "Unrecognized:  q"
     * Then stdout is ""
 
   Scenario: -s --long synonyms

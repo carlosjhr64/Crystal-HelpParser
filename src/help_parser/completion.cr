@@ -20,6 +20,15 @@ module HelpParser
           @cache.clear
         end
       end
+
+      dict = Hash(String, Bool).new
+      @specs.each do |k,v|
+        next if [USAGE,TYPES,EXCLUSIVE].includes?(k)
+        v.flatten.map{|w|w.scan(/\w+/).first[0]}.each{|w|dict[w]=true}
+      end
+      typos = @hash.keys.select{|k|!k.is_a?(UInt8) && !dict[k.to_s]?}
+      raise  UsageError.new(UNRECOGNIZED, typos.join(" ")) unless typos.empty?
+
       raise UsageError.new(MATCH_USAGE)
     end
 

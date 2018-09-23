@@ -48,6 +48,7 @@ module HelpParser
   UNRECOGNIZED_TYPE   = "Unrecognized type spec"
   UNRECOGNIZED_X      = "Unrecognized exclusive spec"
   UNRECOGNIZED_OPTION = "Unrecognized option spec"
+  UNRECOGNIZED        = "Unrecognized"
   UNDEFINED_SECTION   = "Section not defined"
   MISSING_CASES       = "Missing cases"
   MISSING_USAGE       = "Missing usage"

@@ -37,7 +37,7 @@ I prefer easy.
     Blah blah blah
     HELP
 
-    VERSION = "6.3.0"
+    VERSION = "6.4.2"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -61,3 +61,8 @@ I prefer easy.
 
 Well, what do you think?
 PERFECT!
+
+## New for 6.4.2
+
+Matches as well as possible Ruby's 6.4.2 HelpParser,
+now reporting typos user may have on options usage.

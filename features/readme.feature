@@ -61,7 +61,7 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "7d1ef3d365cd15f5281d816eccd0227f"
+    * Then digest is "158b72236ee4c23083b096d1bcb4b843"
 
   Scenario: Second Usage
   # hash # => {0_u8 => "awesome", 'V' => true, 1_u8 => "Joe", "arg" => "Joe"}
@@ -72,7 +72,7 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then digest is "ad6bbb25406605edd7c1c8a836d082b2"
+    * Then digest is "f3f50c20a57a699afd0b0b485112f49f"
 
   Scenario: -s --long synonyms
     * Given option "-s --long synonyms"
