@@ -15,14 +15,14 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "6.5.0"
+    * Then stdout is "6.5.1"
 
   Scenario: --version
     * Given option "--version"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "6.5.0"
+    * Then stdout is "6.5.1"
 
   Scenario: -h
     * Given option "-h"

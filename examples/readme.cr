@@ -29,7 +29,7 @@ Exclusive:
 Blah blah blah
 HELP
 
-VERSION = "6.5.0"
+VERSION = "6.5.1"
 
 # Macros:
 HelpParser.string(name)  # for options.name   : String

@@ -39,7 +39,7 @@ I prefer easy.
     Blah blah blah
     HELP
 
-    VERSION = "6.5.0"
+    VERSION = "6.5.1"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -64,7 +64,7 @@ I prefer easy.
 Well, what do you think?
 PERFECT!
 
-## New for 6.5.0
+## New for 6.5.1
 
 Usage/Help errors now colored red.
 Pre-defined HelpParser::Options `verbose? : Bool | Nil` and `debug? : Bool` methods.

@@ -36,7 +36,7 @@ module HelpParser
     end
 
     def verbose? : Bool | Nil
-      (@hash["verbose"]? == true) ? true : (@hash["quiet"] == true) ? nil : false
+      (@hash["verbose"]? == true) ? true : (@hash["quiet"]? == true) ? nil : false
     end
 
     def debug? : Bool
