@@ -10,10 +10,10 @@ I prefer easy.
 
     HELP = <<-HELP
     # <= Hash here, parser skips
-    # The Awesome Command.
+    # The Awesome Command #
     Usage:
       awesome [:options+] <args>+
-      awesome :alternate <arg=NAME>
+      awesome :alternate+ <arg=NAME>
     Options:
       -v --version       \t Give version and quit
       -h --help          \t Give help and quit
@@ -26,18 +26,20 @@ I prefer easy.
       --bool
     Alternate:
       -V                 \t Just short
+      --verbose
+      --quiet
     Types:
       NAME  /^[A-Z][a-z]+$/
       FLOAT /^\\d+\\.\\d+$/
       YN    /^[YNyn]$/
     Exclusive:
-      version help       \t Tells parser these are exclusive keys
+      verbose quiet      \t Tells parser these are exclusive keys
     # <= Hash here, parser breaks out
     # Notes #
     Blah blah blah
     HELP
 
-    VERSION = "6.4.2"
+    VERSION = "6.5.0"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -61,6 +63,12 @@ I prefer easy.
 
 Well, what do you think?
 PERFECT!
+
+## New for 6.5.0
+
+Usage/Help errors now colored red.
+Pre-defined HelpParser::Options `verbose? : Bool | Nil` and `debug? : Bool` methods.
+`verbose?` is true on --verbose, nil on --quiet, else false.
 
 ## New for 6.4.2
 

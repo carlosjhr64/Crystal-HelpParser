@@ -4,12 +4,12 @@ module HelpParser
 
     # Must give message
     def initialize(message : String, *keys)
-      keys.size==0 ? super(message) : super("#{message}:  #{keys.join(" ")}")
+      keys.empty? ? super(message) : super("#{message}:  #{keys.join(" ")}")
     end
 
     def exit
       if @code > 0
-        STDERR.puts self.message
+        STDERR.puts "\033[0;31m#{self.message}\033[0m"
       else
         puts self.message
       end

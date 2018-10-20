@@ -1,10 +1,10 @@
 require "../src/help_parser"
 
 HELP = <<-HELP
-The Awesome Command.
+# The Awesome Command #
 Usage:
   awesome [:options+] <args>+
-  awesome :alternate <arg=NAME>
+  awesome :alternate+ <arg=NAME>
 Options:
   -v --version       \t Give version and quit
   -h --help          \t Give help and quit
@@ -17,13 +17,19 @@ Options:
   --bool
 Alternate:
   -V                 \t Just short
+  --verbose
+  --quiet
 Types:
   NAME  /^[A-Z][a-z]+$/
   FLOAT /^\\d+\\.\\d+$/
   YN    /^[YNyn]$/
+Exclusive:
+  verbose quiet    \t Tells parser these are mutually exclusive keys
+# Notes #
+Blah blah blah
 HELP
 
-VERSION = "5.1.1"
+VERSION = "6.5.0"
 
 # Macros:
 HelpParser.string(name)  # for options.name   : String

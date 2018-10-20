@@ -13,6 +13,7 @@ end
 When %r/When we run command/ do
   @stdout, @stderr, @status = Open3.capture3("#{@command} #{@options}")
   @stdout.chomp!; @stderr.chomp!
+  @stderr.gsub!(/\e\[([;\d]+)?m/, '') # removes term colors
 end
 
 Then %r/Then exit status is "(\d+)"/ do |status|

@@ -15,28 +15,28 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "5.1.1"
+    * Then stdout is "6.5.0"
 
   Scenario: --version
     * Given option "--version"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then stdout is "5.1.1"
+    * Then stdout is "6.5.0"
 
   Scenario: -h
     * Given option "-h"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then header is "The Awesome Command."
+    * Then header is "# The Awesome Command #"
 
   Scenario: --help
     * Given option "--help"
     * When we run command
     * Then exit status is "0"
     * Then stderr is ""
-    * Then header is "The Awesome Command."
+    * Then header is "# The Awesome Command #"
 
   Scenario: First Usage
   # hash # => {0_u8 => "awesome",
@@ -100,3 +100,10 @@ Feature: Testing examples/readme
     * When we run command
     * Then exit status is "64"
     * Then stderr is "Not an Integer:  number"
+
+  Scenario: --verbose --quiet
+    * Given option "--verbose --quiet Joe"
+    * When we run command
+    * Then exit status is "64"
+    * Then stderr is "Exclusive keys:  verbose quiet"
+    * Then stdout is ""

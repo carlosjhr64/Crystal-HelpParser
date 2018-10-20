@@ -34,5 +34,13 @@ module HelpParser
     def []?(k)
       @hash[k]?
     end
+
+    def verbose? : Bool | Nil
+      (@hash["verbose"]? == true) ? true : (@hash["quiet"] == true) ? nil : false
+    end
+
+    def debug? : Bool
+      @hash["debug"]? == true
+    end
   end
 end
