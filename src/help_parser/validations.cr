@@ -10,7 +10,7 @@ module HelpParser
         end
         break if count<0
       end
-      raise HelpError.new(UNBALANCED, spec) unless count==0
+      raise HelpError.new(UNBALANCED_BRACKETS, spec) unless count==0
     {% end %}
   end
 
@@ -22,24 +22,24 @@ module HelpParser
                 token.match(USAGE_LITERAL_PATTERN)  ||
                 token.match(USAGE_VARIABLE_PATTERN) ||
                 token.match(USAGE_FLAG_GROUP_PATTERN)
-        raise HelpError.new(UNRECOGNIZED_TOKEN, token) unless match
+        raise HelpError.new(UNRECOGNIZED_USAGE_TOKEN, token) unless match
         words.push match["k"] # key
       end
       words.each_with_index do |word,i|
-        raise HelpError.new(DUP_WORD, word) unless i==words.rindex(word)
+        raise HelpError.new(DUPLICATE_WORD, word) unless i==words.rindex(word)
       end
     {% end %}
   end
 
   macro validate_type_spec
     {% if !flag?(:release) %}
-      raise HelpError.new(UNRECOGNIZED_TYPE, spec) unless spec=~SPEC_TYPE_DEFINITION_PATTERN
+      raise HelpError.new(UNRECOGNIZED_TYPE_SPEC, spec) unless spec=~SPEC_TYPE_DEFINITION_PATTERN
     {% end %}
   end
 
   macro validate_exclusive_pair
     {% if !flag?(:release) %}
-      raise HelpError.new(UNRECOGNIZED_X, spec) unless spec=~SPEC_EXCLUSIVE_PAIR_PATTERN
+      raise HelpError.new(UNRECOGNIZED_EXCLUSIVE_SPEC, spec) unless spec=~SPEC_EXCLUSIVE_PAIR_PATTERN
     {% end %}
   end
 
@@ -52,7 +52,7 @@ module HelpParser
         SPEC_SHORT_LONG_DEFAULT_PATTERN
         # OK
       else
-        raise HelpError.new(UNRECOGNIZED_OPTION, spec)
+        raise HelpError.new(UNRECOGNIZED_OPTION_SPEC, spec)
       end
     {% end %}
   end
@@ -67,15 +67,15 @@ module HelpParser
         exclusive.each do |xs|
           xs = xs.as(Tokens)
           k = xs.sort{|a,b|a.to_s<=>b.to_s}.join(" ")
-          raise HelpError.new(DUP_X,k) if seen[k]?
+          raise HelpError.new(DUP_EXCLUSIVE_SPEC, k) if seen[k]?
           seen[k] = true
           xs.each do |x|
-            raise HelpError.new(UNSEEN_FLAG, x) unless flags.includes?(x)
+            raise HelpError.new(UNDEFINED_FLAG, x) unless flags.includes?(x)
           end
         end
       end
       flags.each_with_index do |flag,i|
-        raise HelpError.new(DUP_FLAG, flag) unless i==flags.rindex(flag)
+        raise HelpError.new(DUPLICATE_FLAG, flag) unless i==flags.rindex(flag)
       end
       group = Array(String).new
       specs_usage = specs[USAGE]?
@@ -83,7 +83,7 @@ module HelpParser
         specs_usage.flatten.each do |token|
           if match = token.match(USAGE_FLAG_GROUP_PATTERN)
             key = match["k"]
-            raise HelpError.new(UNDEFINED_SECTION, key) unless specs[key]?
+            raise HelpError.new(SECTION_NOT_DEFINED, key) unless specs[key]?
             group.push(key)
           end
         end
@@ -98,7 +98,7 @@ module HelpParser
 
   macro validate_consistent_variables
     {% if !flag?(:release) %}
-      raise HelpError.new(INCONSISTENT, name) unless type==k2t[name]
+      raise HelpError.new(INCONSISTENT_USE_OF_VARIABLE, name) unless type==k2t[name]
     {% end %}
   end
 
@@ -107,7 +107,7 @@ module HelpParser
       a,b = k2t.values.uniq.sort,t2r.keys.sort
       unless a==b
         c = (a+b).uniq.select{|x|!(a.includes?(x) && b.includes?(x))}
-        raise HelpError.new(UNCOMPLETED_TYPES, c.join(","))
+        raise HelpError.new(UNCOMPLETED_TYPES_DEFINITION, c.join(","))
       end
       @specs.each do |section,tokens|
         next if section==USAGE || section==TYPES
@@ -121,7 +121,7 @@ module HelpParser
           long = long_type[2..(i-1)]
           type = long_type[(i+1)..-1]
           regex = t2r[type]
-          raise HelpError.new(BAD_DEFAULT,long,default,type,regex.inspect) unless regex=~default
+          raise HelpError.new(DEFAULT_DOES_NOT_MATCH_TYPE, long, default, type, regex.inspect) unless regex=~default
         end
       end
     {% end %}

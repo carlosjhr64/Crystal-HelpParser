@@ -9,7 +9,7 @@ module HelpParser
         HelpParser.validate_consistent_variables
       else
         # Expected these to be caught earlier...
-        raise SoftwareError.new(UNEXPECTED, token)
+        raise SoftwareError.new(UNEXPECTED_STRING_IN_HELP_TEXT, token)
       end
     end
     return k2t
