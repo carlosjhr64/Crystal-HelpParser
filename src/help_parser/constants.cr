@@ -4,10 +4,10 @@ module HelpParser
   EXCLUSIVE = "exclusive"
 
   # usage
-  FLAG       = /^[-][-]?(?<k>\w+)$/
-  LITERAL    = /^(?<k>\w[\w.-]*:?)$/
-  VARIABLE   = /^<(?<k>\w+)(=(?<t>[A-Z]+))?>(?<p>[+])?$/
-  FLAG_GROUP = /^:(?<k>\w+)(?<p>[+])?$/
+  USAGE_FLAG_PATTERN       = /^[-][-]?(?<k>\w+)$/
+  USAGE_LITERAL_PATTERN    = /^(?<k>\w[\w.-]*:?)$/
+  USAGE_VARIABLE_PATTERN   = /^<(?<k>\w+)(=(?<t>[A-Z]+))?>(?<p>[+])?$/
+  USAGE_FLAG_GROUP_PATTERN = /^:(?<k>\w+)(?<p>[+])?$/
 
   # spec --?w+
   SHORT = /^[-](?<s>\w)$/

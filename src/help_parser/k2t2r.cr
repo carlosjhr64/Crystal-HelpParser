@@ -3,7 +3,7 @@ module HelpParser
     k2t = StringHash.new
     tokens = specs.select { |k, v| !(k == TYPES) }.values.flatten.select { |v| v.includes?('=') }
     tokens.each do |token|
-      if match = VARIABLE.match(token) || LONG.match(token)
+      if match = USAGE_VARIABLE_PATTERN.match(token) || LONG.match(token)
         name, type = match["k"], match["t"]
         k2t[name] = type if !k2t.has_key?(name)
         HelpParser.validate_consistent_variables

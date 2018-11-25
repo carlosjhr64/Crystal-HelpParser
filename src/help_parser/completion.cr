@@ -102,7 +102,7 @@ module HelpParser
             # OK, NEVERMIND!
           end
           next
-        elsif m = FLAG_GROUP.match(token)
+        elsif m = USAGE_FLAG_GROUP_PATTERN.match(token)
           group, plus = m["k"], m["p"]?
           key = keys[i]?
           raise NoMatch.new if key.nil? || key.is_a?(UInt8)
@@ -115,7 +115,7 @@ module HelpParser
               i += 1_u8
             end
           end
-        elsif m = VARIABLE.match(token)
+        elsif m = USAGE_VARIABLE_PATTERN.match(token)
           key = keys[i]?
           raise NoMatch.new unless key.is_a?(UInt8)
           variable, plus = m["k"], m["p"]?

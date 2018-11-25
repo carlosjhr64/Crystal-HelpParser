@@ -18,10 +18,10 @@ module HelpParser
     {% if !flag?(:release) %}
       words = Strings.new
       tokens.flatten.each do |token|
-        match = token.match(FLAG)     ||
-                token.match(LITERAL)  ||
-                token.match(VARIABLE) ||
-                token.match(FLAG_GROUP)
+        match = token.match(USAGE_FLAG_PATTERN) ||
+                token.match(USAGE_LITERAL_PATTERN)  ||
+                token.match(USAGE_VARIABLE_PATTERN) ||
+                token.match(USAGE_FLAG_GROUP_PATTERN)
         raise HelpError.new(UNRECOGNIZED_TOKEN, token) unless match
         words.push match["k"] # key
       end
@@ -78,7 +78,7 @@ module HelpParser
       specs_usage = specs[USAGE]?
       unless specs_usage.nil?
         specs_usage.flatten.each do |token|
-          if match = token.match(FLAG_GROUP)
+          if match = token.match(USAGE_FLAG_GROUP_PATTERN)
             key = match["k"]
             raise HelpError.new(UNDEFINED_SECTION, key) unless specs[key]?
             group.push(key)

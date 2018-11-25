@@ -9,23 +9,23 @@ end
 
 describe "regexp" do
   it "matches" do
-    HelpParser::FLAG.should match "--flag"
-    if md = HelpParser::FLAG.match "--flag"
+    HelpParser::USAGE_FLAG_PATTERN.should match "--flag"
+    if md = HelpParser::USAGE_FLAG_PATTERN.match "--flag"
       md[1].should eq "flag"
     end
 
-    HelpParser::LITERAL.should match "a-b.c:"
-    if md = HelpParser::LITERAL.match "a-b.c:"
+    HelpParser::USAGE_LITERAL_PATTERN.should match "a-b.c:"
+    if md = HelpParser::USAGE_LITERAL_PATTERN.match "a-b.c:"
       md[1].should eq "a-b.c:"
     end
 
-    HelpParser::VARIABLE.should match "<abc=ABC>+"
-    if md = HelpParser::VARIABLE.match "<abc=ABC>+"
+    HelpParser::USAGE_VARIABLE_PATTERN.should match "<abc=ABC>+"
+    if md = HelpParser::USAGE_VARIABLE_PATTERN.match "<abc=ABC>+"
       md[1].should eq "abc"
     end
 
-    HelpParser::FLAG_GROUP.should match ":abc+"
-    if md = HelpParser::VARIABLE.match ":abc+"
+    HelpParser::USAGE_FLAG_GROUP_PATTERN.should match ":abc+"
+    if md = HelpParser::USAGE_VARIABLE_PATTERN.match ":abc+"
       md[1].should eq "abc"
     end
 
