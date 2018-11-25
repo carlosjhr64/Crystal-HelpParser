@@ -73,8 +73,8 @@ module HelpParser
       end
       flags.each_with_index do |flag,i|
         raise HelpError.new(DUP_FLAG, flag) unless i==flags.rindex(flag)
-      end   
-      group = Array(String).new 
+      end
+      group = Array(String).new
       specs_usage = specs[USAGE]?
       unless specs_usage.nil?
         specs_usage.flatten.each do |token|

@@ -14,18 +14,20 @@ module HelpParser
   VERSION = "7.0.0"
 
   def self.[](
-    version : String | Nil  = nil,
-    help    : String | Nil  = nil,
-    argv    : Array(String) = [File.basename(PROGRAM_NAME)]+ARGV)
+    version : String | Nil = nil,
+    help : String | Nil = nil,
+    argv : Array(String) = [File.basename(PROGRAM_NAME)] + ARGV
+  )
     Options.new(version, help, argv)
   rescue exception : HelpParserException
     exception.exit
   end
 
   def self.new(
-    version : String | Nil  = nil,
-    help    : String | Nil  = nil,
-    argv    : Array(String) = [File.basename(PROGRAM_NAME)]+ARGV)
+    version : String | Nil = nil,
+    help : String | Nil = nil,
+    argv : Array(String) = [File.basename(PROGRAM_NAME)] + ARGV
+  )
     yield Options.new(version, help, argv)
   rescue exception : HelpParserException
     exception.exit

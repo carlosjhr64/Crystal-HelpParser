@@ -1,7 +1,7 @@
 module HelpParser
   def self.k2t(specs : TokensHash) : StringHash
     k2t = StringHash.new
-    tokens = specs.select{|k,v| !(k==TYPES)}.values.flatten.select{|v|v.includes?('=')}
+    tokens = specs.select { |k, v| !(k == TYPES) }.values.flatten.select { |v| v.includes?('=') }
     tokens.each do |token|
       if match = VARIABLE.match(token) || LONG.match(token)
         name, type = match["k"], match["t"]

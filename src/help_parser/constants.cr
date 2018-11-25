@@ -1,6 +1,6 @@
 module HelpParser
-  USAGE = "usage"
-  TYPES = "types"
+  USAGE     = "usage"
+  TYPES     = "types"
   EXCLUSIVE = "exclusive"
 
   # usage
@@ -61,8 +61,8 @@ module HelpParser
   NOT_INTEGER         = "Not an Integer"
   NOT_INTEGERS        = "Not all Integers"
   # error messages, full:
-  NO_MATCH            = "Software Error: NoMatch was not caught by HelpParser."
-  MATCH_USAGE         = "Please match usage."
-  EXTRANEOUS_SPACES   = "Extraneous spaces in help."
-  EXPECTED_TOKENS     = "Expected Tokens from @specs[USAGE]."
+  NO_MATCH          = "Software Error: NoMatch was not caught by HelpParser."
+  MATCH_USAGE       = "Please match usage."
+  EXTRANEOUS_SPACES = "Extraneous spaces in help."
+  EXPECTED_TOKENS   = "Expected Tokens from @specs[USAGE]."
 end

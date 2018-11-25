@@ -2,9 +2,10 @@ module HelpParser
   class Options
     def initialize(
       version : String | Nil,
-      help    : String | Nil,
-      argv    : Array(String),
-      @hash   : ArgvHash = HelpParser.parsea(argv))
+      help : String | Nil,
+      argv : Array(String),
+      @hash : ArgvHash = HelpParser.parsea(argv)
+    )
       if version && (@hash.has_key?('v') || @hash.has_key?("version"))
         # -v or --version
         raise VersionException.new(version)
@@ -18,7 +19,7 @@ module HelpParser
         Completion.new(@hash, specs)
         exclusive = specs[EXCLUSIVE]?
         unless exclusive.nil?
-          exclusive.each{|xs| raise UsageError.new(EXCLUSIVE_KEYS,xs.as(Tokens).join(" ")) if @hash.keys.count{|k|xs.includes?(k.to_s)}>1}
+          exclusive.each { |xs| raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Tokens).join(" ")) if @hash.keys.count { |k| xs.includes?(k.to_s) } > 1 }
         end
       end
     end
