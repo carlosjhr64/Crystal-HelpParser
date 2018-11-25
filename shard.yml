@@ -1,9 +1,9 @@
 name: help_parser
-version: 6.5.1
+version: 7.0.0
 
 authors:
   - carlosjhr64 <carlosjhr64@gmail.com>
 
-crystal: 0.26.1
+crystal: 0.27.0
 
 license: MIT
