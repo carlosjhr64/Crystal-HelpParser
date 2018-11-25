@@ -35,9 +35,4 @@ describe "regexp" do
     HelpParser::SPEC_SHORT_LONG_DEFAULT_PATTERN.should match "-f --flag=FLAG Flag"
     HelpParser::SPEC_TYPE_DEFINITION_PATTERN.should match "ABC /abc/"
   end
-
-  it "splits" do
-    l = "a, b c  d".split(HelpParser::CSV)
-    l.should eq ["a","b","c","d"]
-  end
 end

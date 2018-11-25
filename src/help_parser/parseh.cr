@@ -21,13 +21,13 @@ module HelpParser
           specs[name].push tokens
         when TYPES
           HelpParser.validate_type_spec
-          specs[name].push spec.split(CSV).map { |s| s.as(Token) }
+          specs[name].push spec.split.map { |s| s.as(Token) }
         when EXCLUSIVE
           HelpParser.validate_exclusive_pair
-          specs[name].push spec.split(CSV).map { |s| s.as(Token) }
+          specs[name].push spec.split.map { |s| s.as(Token) }
         else
           HelpParser.validate_option_spec
-          specs[name].push spec.split(CSV).map { |s| s.as(Token) }
+          specs[name].push spec.split.map { |s| s.as(Token) }
         end
       end
     end

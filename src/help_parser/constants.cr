@@ -23,8 +23,6 @@ module HelpParser
   # spec w+( w+)+
   SPEC_EXCLUSIVE_PAIR_PATTERN = /^\w+( +\w+)+$/
 
-  CSV = /,?\s+/
-
   # exit codes
   EX_USAGE    = 64
   EX_SOFTWARE = 70
