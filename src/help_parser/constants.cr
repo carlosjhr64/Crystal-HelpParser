@@ -10,18 +10,18 @@ module HelpParser
   USAGE_FLAG_GROUP_PATTERN = /^:(?<k>\w+)(?<p>[+])?$/
 
   # spec --?w+
-  SHORT = /^[-](?<s>\w)$/
-  LONG  = /^[-][-](?<k>\w+)(=(?<t>[A-Z]+))?(,?\s+(?<d>[^-\s]\S*))?$/
+  SPEC_SHORT_PATTERN = /^[-](?<s>\w)$/
+  SPEC_LONG_PATTERN  = /^[-][-](?<k>\w+)(=(?<t>[A-Z]+))?(,?\s+(?<d>[^-\s]\S*))?$/
 
   # spec -w,? --w+
-  SHORT_LONG         = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)$/
-  SHORT_LONG_DEFAULT = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)(=(?<t>[A-Z]+))?,?\s+(?<d>[^-\s]\S*)$/
+  SPEC_SHORT_LONG_PATTERN         = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)$/
+  SPEC_SHORT_LONG_DEFAULT_PATTERN = /^[-](?<s>\w),?\s+[-][-](?<k>\w+)(=(?<t>[A-Z]+))?,?\s+(?<d>[^-\s]\S*)$/
 
   # spec W+ /~/
-  TYPE_DEF = /^(?<t>[A-Z]+),?\s+\/(?<r>\S+)\/$/
+  SPEC_TYPE_DEFINITION_PATTERN = /^(?<t>[A-Z]+),?\s+\/(?<r>\S+)\/$/
 
   # spec w+( w+)+
-  X_DEF = /^\w+( +\w+)+$/
+  SPEC_EXCLUSIVE_PAIR_PATTERN = /^\w+( +\w+)+$/
 
   CSV = /,?\s+/
 

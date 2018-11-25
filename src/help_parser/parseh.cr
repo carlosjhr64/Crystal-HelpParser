@@ -23,7 +23,7 @@ module HelpParser
           HelpParser.validate_type_spec
           specs[name].push spec.split(CSV).map { |s| s.as(Token) }
         when EXCLUSIVE
-          HelpParser.validate_x_spec
+          HelpParser.validate_exclusive_pair
           specs[name].push spec.split(CSV).map { |s| s.as(Token) }
         else
           HelpParser.validate_option_spec

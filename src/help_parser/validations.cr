@@ -33,20 +33,23 @@ module HelpParser
 
   macro validate_type_spec
     {% if !flag?(:release) %}
-      raise HelpError.new(UNRECOGNIZED_TYPE, spec) unless spec=~TYPE_DEF
+      raise HelpError.new(UNRECOGNIZED_TYPE, spec) unless spec=~SPEC_TYPE_DEFINITION_PATTERN
     {% end %}
   end
 
-  macro validate_x_spec
+  macro validate_exclusive_pair
     {% if !flag?(:release) %}
-      raise HelpError.new(UNRECOGNIZED_X, spec) unless spec=~X_DEF
+      raise HelpError.new(UNRECOGNIZED_X, spec) unless spec=~SPEC_EXCLUSIVE_PAIR_PATTERN
     {% end %}
   end
 
   macro validate_option_spec
     {% if !flag?(:release) %}
       case spec
-      when SHORT, LONG, SHORT_LONG, SHORT_LONG_DEFAULT
+      when SPEC_SHORT_PATTERN,
+        SPEC_LONG_PATTERN,
+        SPEC_SHORT_LONG_PATTERN,
+        SPEC_SHORT_LONG_DEFAULT_PATTERN
         # OK
       else
         raise HelpError.new(UNRECOGNIZED_OPTION, spec)

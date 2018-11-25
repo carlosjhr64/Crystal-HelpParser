@@ -29,11 +29,11 @@ describe "regexp" do
       md[1].should eq "abc"
     end
 
-    HelpParser::SHORT.should match "-f"
-    HelpParser::LONG.should match "--flag"
-    HelpParser::SHORT_LONG.should match "-f --flag"
-    HelpParser::SHORT_LONG_DEFAULT.should match "-f --flag=FLAG Flag"
-    HelpParser::TYPE_DEF.should match "ABC /abc/"
+    HelpParser::SPEC_SHORT_PATTERN.should match "-f"
+    HelpParser::SPEC_LONG_PATTERN.should match "--flag"
+    HelpParser::SPEC_SHORT_LONG_PATTERN.should match "-f --flag"
+    HelpParser::SPEC_SHORT_LONG_DEFAULT_PATTERN.should match "-f --flag=FLAG Flag"
+    HelpParser::SPEC_TYPE_DEFINITION_PATTERN.should match "ABC /abc/"
   end
 
   it "splits" do
