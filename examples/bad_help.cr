@@ -219,11 +219,23 @@ Exclusive:
 # This one is actually OK!
 HELP
 
+# Duplicate section
+HELP17 = <<-HELP
+Usage:
+  #{PN} [:options+] <args>
+Usage:
+  #{PN} [:options+] <args+>
+Options:
+  -n --number=NUMBER 1
+Types:
+  NUMBER /^\\d+$/
+HELP
+
 HELPS = [
   HELP0, HELP1, HELP2, HELP3, HELP4, HELP5,
   HELP6, HELP7, HELP8, HELP9, HELP10,
   HELP11, HELP12, HELP13, HELP14, HELP15,
-  HELP16
+  HELP16, HELP17
 ]
 
 N = (ARGV.size>0)? ARGV[0].to_i : 0

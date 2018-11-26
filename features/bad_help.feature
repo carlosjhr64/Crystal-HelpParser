@@ -123,3 +123,11 @@ Feature: Testing examples/bad_help
     * Then exit status is "0"
     * Then stderr is ""
     * Then stdout is '{"0":"crystal-run-bad_help.tmp","1":"16","arg1":"16"}'
+
+  # Duplicat Section
+  Scenario: 17
+    * Given option "17"
+    * When we run command
+    * Then exit status is "78"
+    * Then stderr is "Duplicate section:  usage"
+    * Then stdout is ""

@@ -1,18 +1,3 @@
-private macro hash_class(name, key, value)
-  class {{name.id}} < Hash({{key.id}}, {{value.id}})
-    def []=(k : {{key.id}}, v : {{value.id}})
-      {% if !flag?(:release) %}
-        raise HelpError.new(DUPLICATE_KEY,k) if self.has_key?(k)
-      {% end %}
-      super
-    end
-
-    def []=(k, v)
-      raise SoftwareError.new(UNRECOGNIZED_MAPPING, k, v)
-    end
-  end
-end
-
 module HelpParser
   alias Chars = Array(Char)
   alias Token = String | Array(Token)
@@ -22,14 +7,14 @@ module HelpParser
   alias ArgvKey = String | Char | UInt8
   alias ArgvValue = Bool | Stringer
 
-  hash_class(TokensHash, String, Tokens)
-  hash_class(StringHash, String, String)
-  hash_class(RegexHash, String, Regex)
-  hash_class(StringerHash, String, Stringer)
+  alias TokensHash = Hash(String, Tokens)
+  alias StringHash = Hash(String, String)
+  alias RegexHash = Hash(String, Regex)
+  alias StringerHash = Hash(String, Stringer)
 
   class ArgvHash < Hash(ArgvKey, ArgvValue)
     private macro nodupkey(k)
-# No duplicate keys allowed in argv
+      # No duplicate keys allowed in argv
       raise UsageError.new(DUPLICATE_KEY, {{k.id}} ) if self.has_key?( {{k.id}} )
     end
 

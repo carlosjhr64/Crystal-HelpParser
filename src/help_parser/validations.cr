@@ -67,7 +67,7 @@ module HelpParser
         exclusive.each do |xs|
           xs = xs.as(Tokens)
           k = xs.sort{|a,b|a.to_s<=>b.to_s}.join(" ")
-          raise HelpError.new(DUP_EXCLUSIVE_SPEC, k) if seen[k]?
+          raise HelpError.new(DUPLICATE_EXCLUSIVE_SPEC, k) if seen[k]?
           seen[k] = true
           xs.each do |x|
             raise HelpError.new(UNDEFINED_FLAG, x) unless flags.includes?(x)
