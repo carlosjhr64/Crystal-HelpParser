@@ -1,5 +1,5 @@
 module HelpParser
-  def self.parseu(chars : Chars) : Tokens
+  def self.parseu(chars : Array(Char)) : Tokens
     tokens, token = Tokens.new, ""
     while c = chars.shift?
       case c

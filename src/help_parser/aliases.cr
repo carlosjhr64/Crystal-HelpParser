@@ -1,5 +1,4 @@
 module HelpParser
-  alias Chars = Array(Char)
   alias Token = String | Array(Token)
   alias Tokens = Array(Token)
   alias Strings = Array(String)
