@@ -1,6 +1,6 @@
 module HelpParser
-  def self.parseu(chars : Array(Char)) : Tokens
-    tokens, token = Tokens.new, ""
+  def self.parseu(chars : Array(Char)) : Array(Token)
+    tokens, token = Array(Token).new, ""
     while c = chars.shift?
       case c
       when ' ', '[', ']'

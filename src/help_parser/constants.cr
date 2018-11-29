@@ -54,7 +54,7 @@ module HelpParser
   UNCOMPLETED_TYPES_DEFINITION   = "Uncompleted types definition"
   DEFAULT_DOES_NOT_MATCH_TYPE    = "Default does not match type"
   NOT_A_STRING                   = "Not a String"
-  NOT_ALL_STRINGS                = "Not all Strings"
+  NOT_ALL_STRINGS                = "Not all Array(String)"
   NOT_A_FLOAT                    = "Not a Float"
   NOT_ALL_FLOATS                 = "Not all Floats"
   NOT_AN_INTEGER                 = "Not an Integer"
@@ -64,5 +64,5 @@ module HelpParser
   NO_MATCH          = "Software Error: NoMatch was not caught by HelpParser."
   MATCH_USAGE       = "Please match usage."
   EXTRANEOUS_SPACES = "Extraneous spaces in help."
-  EXPECTED_TOKENS   = "Expected Tokens from @specs[USAGE]."
+  EXPECTED_TOKENS   = "Expected Array(Token) from @specs[USAGE]."
 end

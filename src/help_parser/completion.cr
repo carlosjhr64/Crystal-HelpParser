@@ -1,6 +1,9 @@
 module HelpParser
   class Completion
-    def initialize(@hash : ArgvHash, @specs : TokensHash, @cache : StringerHash = StringerHash.new)
+    def initialize(
+      @hash : ArgvHash, @specs : TokensHash,
+      @cache : Hash(String, String | Array(String)) = Hash(String, String | Array(String)).new
+    )
       usage if @specs.has_key?(USAGE)
       pad
       types
@@ -8,7 +11,7 @@ module HelpParser
 
     def usage
       @specs[USAGE].each do |cmd|
-        raise SoftwareError.new(EXPECTED_TOKENS) unless cmd.is_a?(Tokens)
+        raise SoftwareError.new(EXPECTED_TOKENS) unless cmd.is_a?(Array(Token))
         begin
           i = matches(cmd)
           raise NoMatch.new unless @hash.size == i
@@ -43,7 +46,7 @@ module HelpParser
             case value
             when String
               raise UsageError.new("--#{key}=#{value} !~ #{type}=#{regex.inspect}") unless value =~ regex
-            when Strings
+            when Array(String)
               value.each do |string|
                 raise UsageError.new("--#{key}=#{string} !~ #{type}=#{regex.inspect}") unless string =~ regex
               end
@@ -60,7 +63,7 @@ module HelpParser
       @specs.each do |section, options|
         next if section == USAGE || section == TYPES
         options.each do |words|
-          next unless words.as(Tokens).size > 1
+          next unless words.as(Array(Token)).size > 1
           first, second, default = words[0].as(String), words[1].as(String), words[2]?
           if first[0] == '-'
             if second[0] == '-'
@@ -92,10 +95,10 @@ module HelpParser
       end
     end
 
-    def matches(cmd : Tokens, i : UInt8 = 0_u8) : UInt8
+    def matches(cmd : Array(Token), i : UInt8 = 0_u8) : UInt8
       keys = @hash.keys
       cmd.each do |token|
-        if token.is_a?(Tokens)
+        if token.is_a?(Array(Token))
           begin
             i = matches(token, i)
           rescue NoMatch

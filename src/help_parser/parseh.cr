@@ -8,7 +8,7 @@ module HelpParser
         {% if !flag?(:release) %}
           raise HelpError.new(DUPLICATE_SECTION, name) if specs.has_key?(name)
         {% end %}
-        specs[name] = Tokens.new
+        specs[name] = Array(Token).new
       else
         next if name == ""
         break if line[0] == '#'

@@ -1,17 +1,8 @@
 module HelpParser
   alias Token = String | Array(Token)
-  alias Tokens = Array(Token)
-  alias Strings = Array(String)
-  alias Stringer = String | Strings
-  alias ArgvKey = String | Char | UInt8
-  alias ArgvValue = Bool | Stringer
+  alias TokensHash = Hash(String, Array(Token))
 
-  alias TokensHash = Hash(String, Tokens)
-  alias StringHash = Hash(String, String)
-  alias RegexHash = Hash(String, Regex)
-  alias StringerHash = Hash(String, Stringer)
-
-  class ArgvHash < Hash(ArgvKey, ArgvValue)
+  class ArgvHash < Hash(UInt8 | Char | String, Bool | String | Array(String))
     private macro nodupkey(k)
       # No duplicate keys allowed in argv
       raise UsageError.new(DUPLICATE_KEY, {{k.id}} ) if self.has_key?( {{k.id}} )
@@ -57,9 +48,9 @@ module HelpParser
       super
     end
 
-    # String => ArgvValue
+    # String => Bool | String | Array(String)
     def [](k : String)
-      super.as(ArgvValue)
+      super.as(Bool | String | Array(String))
     end
 
     def []=(k, v)

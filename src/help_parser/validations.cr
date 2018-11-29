@@ -16,7 +16,7 @@ module HelpParser
 
   macro validate_usage_tokens
     {% if !flag?(:release) %}
-      words = Strings.new
+      words = Array(String).new
       tokens.flatten.each do |token|
         match = token.match(USAGE_FLAG_PATTERN) ||
                 token.match(USAGE_LITERAL_PATTERN)  ||
@@ -65,7 +65,7 @@ module HelpParser
       unless exclusive.nil?
         seen = Hash(String,Bool).new
         exclusive.each do |xs|
-          xs = xs.as(Tokens)
+          xs = xs.as(Array(Token))
           k = xs.sort{|a,b|a.to_s<=>b.to_s}.join(" ")
           raise HelpError.new(DUPLICATE_EXCLUSIVE_SPEC, k) if seen[k]?
           seen[k] = true

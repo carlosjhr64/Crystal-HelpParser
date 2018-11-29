@@ -31,8 +31,8 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}} : Strings
-            @hash["{{name.id}}"].as(Strings)
+          def {{name.id}} : Array(String)
+            @hash["{{name.id}}"].as(Array(String))
           rescue
             raise UsageError.new(NOT_ALL_STRINGS, "{{name.id}}")
           end
@@ -45,8 +45,8 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Strings | Nil
-            @hash["{{name.id}}"]?.as(Strings | Nil)
+          def {{name.id}}? : Array(String) | Nil
+            @hash["{{name.id}}"]?.as(Array(String) | Nil)
           rescue
             raise UsageError.new(NOT_ALL_STRINGS, "{{name.id}}")
           end
@@ -89,7 +89,7 @@ module HelpParser
       class Options
         {% for name in names %}
           def {{name.id}} : Array(Float64)
-            @hash["{{name.id}}"].as(Strings).map{|v|v.as(String).to_f}
+            @hash["{{name.id}}"].as(Array(String)).map{|v|v.as(String).to_f}
           rescue
             raise UsageError.new(NOT_ALL_FLOATS, "{{name.id}}")
           end
@@ -104,7 +104,7 @@ module HelpParser
         {% for name in names %}
           def {{name.id}}? : Array(Float64) | Nil
             a = @hash["{{name.id}}"]?
-            a ? a.as(Strings).map{|v|v.as(String).to_f} : nil
+            a ? a.as(Array(String)).map{|v|v.as(String).to_f} : nil
           rescue
             raise UsageError.new(NOT_ALL_FLOATS, "{{name.id}}")
           end
@@ -147,7 +147,7 @@ module HelpParser
       class Options
         {% for name in names %}
           def {{name.id}} : Array(Int32)
-            @hash["{{name.id}}"].as(Strings).map{|v|v.as(String).to_i}
+            @hash["{{name.id}}"].as(Array(String)).map{|v|v.as(String).to_i}
           rescue
             raise UsageError.new(NOT_ALL_INTEGERS, "{{name.id}}")
           end
@@ -162,7 +162,7 @@ module HelpParser
         {% for name in names %}
           def {{name.id}}? : Array(Int32) | Nil
             a = @hash["{{name.id}}"]?
-            a ? a.as(Strings).map{|v|v.as(String).to_i} : nil
+            a ? a.as(Array(String)).map{|v|v.as(String).to_i} : nil
           rescue
             raise UsageError.new(NOT_ALL_INTEGERS, "{{name.id}}")
           end
