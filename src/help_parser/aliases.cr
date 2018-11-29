@@ -1,6 +1,5 @@
 module HelpParser
   alias Token = String | Array(Token)
-  alias TokensHash = Hash(String, Array(Token))
 
   class ArgvHash < Hash(UInt8 | Char | String, Bool | String | Array(String))
     private macro nodupkey(k)
@@ -71,6 +70,6 @@ module HelpParser
   end
 
   macro reserved(k)
-    [USAGE,TYPES,EXCLUSIVE].includes?({{k.id}})
+    [USAGE, TYPES, EXCLUSIVE].includes?({{k.id}})
   end
 end

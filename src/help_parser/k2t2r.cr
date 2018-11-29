@@ -1,5 +1,5 @@
 module HelpParser
-  def self.k2t(specs : TokensHash) : Hash(String, String)
+  def self.k2t(specs : Hash(String, Array(Token))) : Hash(String, String)
     k2t = Hash(String, String).new
     tokens = specs.select { |k, v| !(k == TYPES) }.values.flatten.select { |v| v.includes?('=') }
     tokens.each do |token|
@@ -15,7 +15,7 @@ module HelpParser
     return k2t
   end
 
-  def self.t2r(specs : TokensHash) : Hash(String, Regex) | Nil
+  def self.t2r(specs : Hash(String, Array(Token))) : Hash(String, Regex) | Nil
     if types = specs[TYPES]?
       t2r = Hash(String, Regex).new
       types.each do |pair|

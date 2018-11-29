@@ -1,7 +1,8 @@
 module HelpParser
   class Completion
     def initialize(
-      @hash : ArgvHash, @specs : TokensHash,
+      @hash : ArgvHash,
+      @specs : Hash(String, Array(Token)),
       @cache : Hash(String, String | Array(String)) = Hash(String, String | Array(String)).new
     )
       usage if @specs.has_key?(USAGE)
@@ -26,7 +27,7 @@ module HelpParser
 
       dict = Hash(String, Bool).new
       @specs.each do |k, v|
-        next if [USAGE, TYPES, EXCLUSIVE].includes?(k)
+        next if HelpParser.reserved(k)
         v.flatten.map { |w| w.scan(/\w+/).first[0] }.each { |w| dict[w] = true }
       end
       typos = @hash.keys.select { |k| !k.is_a?(UInt8) && !dict[k.to_s]? }

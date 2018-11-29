@@ -1,6 +1,6 @@
 module HelpParser
-  def self.parseh(help : String) : TokensHash
-    specs, name = TokensHash.new, ""
+  def self.parseh(help : String) : Hash(String, Array(Token))
+    specs, name = Hash(String, Array(Token)).new, ""
     help.each_line do |line|
       next if line == ""
       if line =~ /^[A-Z]\w+:$/
