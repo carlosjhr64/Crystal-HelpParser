@@ -25,12 +25,12 @@ module HelpParser
         end
       end
 
-      dict = Hash(String, Bool).new
+      dict = Set(String).new
       @specs.each do |k, v|
         next if HelpParser.reserved(k)
-        v.flatten.map { |w| w.scan(/\w+/).first[0] }.each { |w| dict[w] = true }
+        v.flatten.map { |w| w.scan(/\w+/).first[0] }.each { |w| dict.add(w) }
       end
-      typos = @hash.keys.select { |k| !k.is_a?(UInt8) && !dict[k.to_s]? }
+      typos = @hash.keys.select { |k| !k.is_a?(UInt8) && !dict.includes?(k.to_s) }
       raise UsageError.new(UNRECOGNIZED, typos.join(" ")) unless typos.empty?
 
       raise UsageError.new(MATCH_USAGE)
