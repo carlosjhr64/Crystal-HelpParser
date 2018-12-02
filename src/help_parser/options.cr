@@ -15,12 +15,7 @@ module HelpParser
         if @hash.has_key?('h') || @hash.has_key?("help")
           raise HelpException.new(help)
         end
-        specs = HelpParser.parseh(help)
-        Completion.new(@hash, specs)
-        exclusive = specs[EXCLUSIVE]?
-        unless exclusive.nil?
-          exclusive.each { |xs| raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Array(Token)).join(" ")) if @hash.keys.count { |k| xs.includes?(k.to_s) } > 1 }
-        end
+        Completion.new(@hash, HelpParser.parseh(help))
       end
     end
 
