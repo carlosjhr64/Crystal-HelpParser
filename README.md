@@ -1,10 +1,7 @@
-# Help Parser VI: Tweeker
+# Help Parser VII: Better
 
-Welcome to the best Help Parser of all!
-Tweeker!
-Which do you find most helpful?
-Hard?
-I prefer easy.
+You gave me your HELP.
+Now your OPTIONS belong to me!
 
     require "help_parser"
 
@@ -61,8 +58,13 @@ I prefer easy.
       pp options.b?
     end
 
-Well, what do you think?
-PERFECT!
+Can't parse you?
+You're not the first to say that.
+Welcome to HelpParser.
+
+## New for 7.0.0
+
+Just code reviewed.
 
 ## New for 6.5.1
 
