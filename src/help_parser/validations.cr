@@ -64,14 +64,13 @@ module HelpParser
     {% if !flag?(:release) %}
       option_specs = specs.select{|a,b| !HelpParser.reserved(a)}
       flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{|f|HelpParser.f2s(f)}
-      exclusive = specs[EXCLUSIVE]?
-      unless exclusive.nil?
-        seen = Hash(String,Bool).new
+      if exclusive = specs[EXCLUSIVE]?
+        seen = Set(String).new
         exclusive.each do |xs|
           xs = xs.as(Array(Token))
           k = xs.sort{|a,b|a.to_s<=>b.to_s}.join(" ")
-          raise HelpError.new(DUPLICATE_EXCLUSIVE_SPEC, k) if seen[k]?
-          seen[k] = true
+          raise HelpError.new(DUPLICATE_EXCLUSIVE_SPEC, k) if seen.includes?(k)
+          seen.add k
           xs.each do |x|
             raise HelpError.new(UNDEFINED_FLAG, x) unless flags.includes?(x)
           end
@@ -81,8 +80,7 @@ module HelpParser
         raise HelpError.new(DUPLICATE_FLAG, flag) unless i==flags.rindex(flag)
       end
       group = Array(String).new
-      specs_usage = specs[USAGE]?
-      unless specs_usage.nil?
+      if specs_usage = specs[USAGE]?
         specs_usage.flatten.each do |token|
           if match = token.match(USAGE_FLAG_GROUP_PATTERN)
             key = match["k"]
