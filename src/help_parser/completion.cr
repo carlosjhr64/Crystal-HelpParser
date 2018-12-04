@@ -8,11 +8,13 @@ module HelpParser
       usage if @specs.has_key?(USAGE)
       pad
       types
-      if exclusive = specs[EXCLUSIVE]?
-        exclusive.each do |xs|
-          if @hash.keys.count { |k| xs.includes?(k.to_s) } > 1
-            raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Array(Token)).join(" "))
-          end
+      exclusive if @specs.has_key?(EXCLUSIVE)
+    end
+
+    def exclusive
+      @specs[EXCLUSIVE].each do |xs|
+        if @hash.keys.count { |k| xs.includes?(k.to_s) } > 1
+          raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Array(Token)).join(" "))
         end
       end
     end
