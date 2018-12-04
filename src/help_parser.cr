@@ -23,7 +23,7 @@ module HelpParser
     exception.exit
   end
 
-  def self.new(
+  def self.run(
     version : String | Nil = nil,
     help : String | Nil = nil,
     argv : Array(String) = [File.basename(PROGRAM_NAME)] + ARGV

@@ -39,7 +39,7 @@ HelpParser.int?(number)  # for options.number : Int32 | Nil
 HelpParser.sbool?(bool)  # for options.bool?  : Bool
 HelpParser.cbool?(b)     # for options.b?     : Bool
 
-HelpParser.new(VERSION, HELP, ["awesome"]+ARGV) do |options|
+HelpParser.run(VERSION, HELP, ["awesome"]+ARGV) do |options|
   hash = options._hash
   pp hash # to inspect the hash
 
