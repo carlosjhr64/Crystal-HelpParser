@@ -1,3 +1,6 @@
+# Code here only active in development mode.
+# Nothing here appears when --release compile optis is set.
+# What this code does is find errors in the help text.
 module HelpParser
   macro validate_line_chars
     {% if !flag?(:release) %}
