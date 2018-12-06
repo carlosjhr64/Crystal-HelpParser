@@ -33,3 +33,10 @@ Feature: Testing examples/simple
     * Then exit status is "64"
     * Then stderr is "Redundant:  s long"
     * Then stdout is ""
+
+  Scenario: -s -s
+    * Given option "-s -s"
+    * When we run command
+    * Then exit status is "64"
+    * Then stderr is "Duplicate key:  s"
+    * Then stdout is ""
