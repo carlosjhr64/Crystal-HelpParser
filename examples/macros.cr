@@ -40,5 +40,5 @@ elsif OPTIONS.many?
 elsif OPTIONS.much?
   puts "Much Total: #{OPTIONS.much.sum}"
 else
-  puts OPTIONS._hash
+  puts OPTIONS.hash!
 end

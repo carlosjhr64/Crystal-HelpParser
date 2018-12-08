@@ -21,4 +21,4 @@ HELP
 VERSION = "1.0.0"
 
 OPTIONS = HelpParser[VERSION, HELP]
-puts OPTIONS._hash.to_json
+puts OPTIONS.hash!.to_json

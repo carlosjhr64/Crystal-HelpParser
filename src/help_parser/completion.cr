@@ -1,7 +1,7 @@
 module HelpParser
   class Completion
     def initialize(
-      @hash : ArgvHash,
+      @options : Options,
       @specs : Hash(String, Array(Token)),
       @cache : Hash(String, String | Array(String)) = Hash(String, String | Array(String)).new
     )
@@ -12,20 +12,23 @@ module HelpParser
     end
 
     def exclusive
+      keys = @options.hash!.keys
       @specs[EXCLUSIVE].each do |xs|
-        if @hash.keys.count { |k| xs.includes?(k.to_s) } > 1
+        if keys.count { |k| xs.includes?(k.to_s) } > 1
           raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Array(Token)).join(" "))
         end
       end
     end
 
     def usage
+      size = @options.hash!.size
       @specs[USAGE].each do |cmd|
         raise SoftwareError.new(EXPECTED_TOKENS) unless cmd.is_a?(Array(Token))
         begin
           i = matches(cmd)
-          raise NoMatch.new unless @hash.size == i
-          @cache.each { |k, v| @hash[k] = v } # Variables
+          raise NoMatch.new unless size == i
+          # Variables:
+          @cache.each { |k, v| @options[k] = v }
           return
         rescue NoMatch
           next
@@ -39,7 +42,7 @@ module HelpParser
         next if HelpParser.reserved(k)
         v.flatten.map { |w| w.scan(/\w+/).first[0] }.each { |w| dict.add(w) }
       end
-      typos = @hash.keys.select { |k| !k.is_a?(UInt8) && !dict.includes?(k.to_s) }
+      typos = @options.hash!.keys.select { |k| !k.is_a?(UInt8) && !dict.includes?(k.to_s) }
       raise UsageError.new(UNRECOGNIZED, typos.join(" ")) unless typos.empty?
 
       raise UsageError.new(MATCH_USAGE)
@@ -49,7 +52,7 @@ module HelpParser
       if t2r = HelpParser.t2r(@specs)
         k2t = HelpParser.k2t(@specs)
         HelpParser.validate_k2t2r
-        @hash.each do |key, value|
+        @options.hash!.each do |key, value|
           next unless key.is_a?(String)
           if type = k2t[key]?
             regex = t2r[type]
@@ -70,6 +73,7 @@ module HelpParser
 
     def pad
       # Synonyms and defaults:
+      hash = @options.hash!
       @specs.each do |section, options|
         next if section == USAGE || section == TYPES
         options.each do |words|
@@ -79,25 +83,25 @@ module HelpParser
             if second[0] == '-'
               i = second.index('=') || 0
               short, long = first[1], second[2..(i - 1)]
-              if @hash.has_key?(short)
-                if @hash.has_key?(long)
+              if hash.has_key?(short)
+                if hash.has_key?(long)
                   raise UsageError.new(REDUNDANT, short, long)
                 end
-                @hash[long] = (default.nil?) ? true : default.as(String)
-              elsif value = @hash[long]?
-                @hash[short] = true
+                @options[long] = (default.nil?) ? true : default.as(String)
+              elsif value = @options[long]?
+                @options[short] = true
                 if value == true && !default.nil?
-                  @hash.delete(long)
-                  @hash[long] = default.as(String)
+                  hash.delete(long)
+                  @options[long] = default.as(String)
                 end
               end
             else
               i = first.index('=') || 0
               long, default = first[2..(i - 1)], second
-              value = @hash[long]?
+              value = @options[long]?
               if value == true
-                @hash.delete(long)
-                @hash[long] = default
+                hash.delete(long)
+                @options[long] = default
               end
             end
           end
@@ -106,7 +110,7 @@ module HelpParser
     end
 
     def matches(cmd : Array(Token), i : UInt8 = 0_u8) : UInt8
-      keys = @hash.keys
+      keys = @options.hash!.keys
       cmd.each do |token|
         if token.is_a?(Array(Token))
           begin
@@ -133,21 +137,21 @@ module HelpParser
           raise NoMatch.new unless key.is_a?(UInt8)
           variable, plus = m["k"], m["p"]?
           if plus.nil?
-            @cache[variable] = @hash[key]
+            @cache[variable] = @options[key]
           else
             strings = Array(String).new
-            strings.push @hash[key]
+            strings.push @options[key]
             loop do
               key = keys[i + 1_u8]?
               break unless key.is_a?(UInt8)
-              strings.push @hash[key]
+              strings.push @options[key]
               i += 1_u8
             end
             @cache[variable] = strings
           end
         else # literal
           key = keys[i]?
-          raise NoMatch.new if key.nil? || @hash[key] != token
+          raise NoMatch.new if key.nil? || @options[key] != token
         end
         i += 1_u8
       end

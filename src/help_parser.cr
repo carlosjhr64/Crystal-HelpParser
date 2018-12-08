@@ -1,7 +1,6 @@
 require "./help_parser/constants"
 require "./help_parser/exceptions"
 require "./help_parser/aliases"
-require "./help_parser/parsea"
 require "./help_parser/validations"
 require "./help_parser/parseu"
 require "./help_parser/parseh"
