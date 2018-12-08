@@ -40,3 +40,10 @@ Feature: Testing examples/simple
     * Then exit status is "64"
     * Then stderr is "Duplicate key:  s"
     * Then stdout is ""
+
+  Scenario: --long --long
+    * Given option "--long --long"
+    * When we run command
+    * Then exit status is "64"
+    * Then stderr is "Duplicate key:  long"
+    * Then stdout is ""
