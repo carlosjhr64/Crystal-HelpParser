@@ -10,7 +10,7 @@ require "./help_parser/options"
 require "./help_parser/macros"
 
 module HelpParser
-  VERSION = "7.0.0"
+  VERSION = "8.0.0"
 
   def self.[](
     version : String? = nil,

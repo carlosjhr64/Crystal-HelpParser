@@ -1,7 +1,6 @@
-# Help Parser VII: Better
+# Help Parser VIII: Helpland
 
-You gave me your HELP.
-Now your OPTIONS belong to me!
+You invitation to HelpParser.
 
     require "help_parser"
 
@@ -36,7 +35,7 @@ Now your OPTIONS belong to me!
     Blah blah blah
     HELP
 
-    VERSION = "7.0.0"
+    VERSION = "8.0.0"
 
     # Macros:
     HelpParser.string(name)  # for options.name    : String
@@ -58,13 +57,11 @@ Now your OPTIONS belong to me!
       pp options.b?
     end
 
-Can't parse you?
-You're not the first to say that.
-Welcome to HelpParser.
+Let's play!
 
-## New for 7.0.0
+## New for 8.0.0
 
-Just code reviewed.
+HelpParser::Options#_hash changed to #.to_h.
 
 ## New for 6.5.1
 
