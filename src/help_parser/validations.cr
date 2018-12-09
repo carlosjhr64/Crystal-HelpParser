@@ -2,6 +2,12 @@
 # Nothing here appears when --release compile optis is set.
 # What this code does is find errors in the help text.
 module HelpParser
+  macro validate_duplicate_section
+    {% if !flag?(:release) %}
+      raise HelpError.new(DUPLICATE_SECTION, name) if specs.has_key?(name)
+    {% end %}
+  end
+
   macro validate_line_chars
     {% if !flag?(:release) %}
       count = 0

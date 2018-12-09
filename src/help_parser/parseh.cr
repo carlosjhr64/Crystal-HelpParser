@@ -5,9 +5,7 @@ module HelpParser
       next if line == ""
       if line =~ /^[A-Z]\w+:$/
         name = line[0..-2].downcase
-        {% if !flag?(:release) %}
-          raise HelpError.new(DUPLICATE_SECTION, name) if specs.has_key?(name)
-        {% end %}
+        HelpParser.validate_duplicate_section
         specs[name] = Array(Token).new
       else
         next if name == ""
