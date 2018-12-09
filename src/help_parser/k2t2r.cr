@@ -15,7 +15,7 @@ module HelpParser
     return k2t
   end
 
-  def self.t2r(specs : Hash(String, Array(Token))) : Hash(String, Regex) | Nil
+  def self.t2r(specs : Hash(String, Array(Token))) : Hash(String, Regex)?
     if types = specs[TYPES]?
       t2r = Hash(String, Regex).new
       types.each do |pair|

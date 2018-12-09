@@ -17,8 +17,8 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : String | Nil
-            @hash["{{name.id}}"]?.as(String | Nil)
+          def {{name.id}}? : String?
+            @hash["{{name.id}}"]?.as(String?)
           rescue
             raise UsageError.new(NOT_A_STRING, "{{name.id}}")
           end
@@ -45,8 +45,8 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Array(String) | Nil
-            @hash["{{name.id}}"]?.as(Array(String) | Nil)
+          def {{name.id}}? : Array(String)?
+            @hash["{{name.id}}"]?.as(Array(String)?)
           rescue
             raise UsageError.new(NOT_ALL_STRINGS, "{{name.id}}")
           end
@@ -73,7 +73,7 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Float64 | Nil
+          def {{name.id}}? : Float64?
             a = @hash["{{name.id}}"]?
             a ? a.as(String).to_f : nil
           rescue
@@ -102,7 +102,7 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Array(Float64) | Nil
+          def {{name.id}}? : Array(Float64)?
             a = @hash["{{name.id}}"]?
             a ? a.as(Array(String)).map{|v|v.as(String).to_f} : nil
           rescue
@@ -131,7 +131,7 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Int32 | Nil
+          def {{name.id}}? : Int32?
             a = @hash["{{name.id}}"]?
             a ? a.as(String).to_i : nil
           rescue
@@ -160,7 +160,7 @@ module HelpParser
     module HelpParser
       class Options
         {% for name in names %}
-          def {{name.id}}? : Array(Int32) | Nil
+          def {{name.id}}? : Array(Int32)?
             a = @hash["{{name.id}}"]?
             a ? a.as(Array(String)).map{|v|v.as(String).to_i} : nil
           rescue

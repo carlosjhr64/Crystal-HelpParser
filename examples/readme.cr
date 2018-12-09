@@ -35,7 +35,7 @@ VERSION = "7.0.0"
 HelpParser.string(name)  # for options.name   : String
 HelpParser.strings(args) # for options.args   : Array(String)
 HelpParser.float(value)  # for options.value  : Float
-HelpParser.int?(number)  # for options.number : Int32 | Nil
+HelpParser.int?(number)  # for options.number : Int32?
 HelpParser.sbool?(bool)  # for options.bool?  : Bool
 HelpParser.cbool?(b)     # for options.b?     : Bool
 

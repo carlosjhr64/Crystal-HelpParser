@@ -13,8 +13,8 @@ module HelpParser
   VERSION = "7.0.0"
 
   def self.[](
-    version : String | Nil = nil,
-    help : String | Nil = nil,
+    version : String? = nil,
+    help : String? = nil,
     argv : Array(String) = [File.basename(PROGRAM_NAME)] + ARGV
   )
     Options.new(version, help, argv)
@@ -23,8 +23,8 @@ module HelpParser
   end
 
   def self.run(
-    version : String | Nil = nil,
-    help : String | Nil = nil,
+    version : String? = nil,
+    help : String? = nil,
     argv : Array(String) = [File.basename(PROGRAM_NAME)] + ARGV
   )
     yield Options.new(version, help, argv)
