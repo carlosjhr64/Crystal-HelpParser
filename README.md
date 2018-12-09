@@ -1,6 +1,6 @@
 # Help Parser VIII: Helpland
 
-You invitation to HelpParser.
+Your invitation to HelpParser.
 
     require "help_parser"
 
