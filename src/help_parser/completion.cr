@@ -12,7 +12,7 @@ module HelpParser
     end
 
     def exclusive
-      keys = @options.hash!.keys
+      keys = @options.to_h.keys
       @specs[EXCLUSIVE].each do |xs|
         if keys.count { |k| xs.includes?(k.to_s) } > 1
           raise UsageError.new(EXCLUSIVE_KEYS, xs.as(Array(Token)).join(" "))
@@ -21,7 +21,7 @@ module HelpParser
     end
 
     def usage
-      size = @options.hash!.size
+      size = @options.to_h.size
       @specs[USAGE].each do |cmd|
         raise SoftwareError.new(EXPECTED_TOKENS) unless cmd.is_a?(Array(Token))
         begin
@@ -42,7 +42,7 @@ module HelpParser
         next if HelpParser.reserved(k)
         v.flatten.map { |w| w.scan(/\w+/).first[0] }.each { |w| dict.add(w) }
       end
-      typos = @options.hash!.keys.select { |k| !k.is_a?(UInt8) && !dict.includes?(k.to_s) }
+      typos = @options.to_h.keys.select { |k| !k.is_a?(UInt8) && !dict.includes?(k.to_s) }
       raise UsageError.new(UNRECOGNIZED, typos.join(" ")) unless typos.empty?
 
       raise UsageError.new(MATCH_USAGE)
@@ -52,7 +52,7 @@ module HelpParser
       if t2r = HelpParser.t2r(@specs)
         k2t = HelpParser.k2t(@specs)
         HelpParser.validate_k2t2r
-        @options.hash!.each do |key, value|
+        @options.to_h.each do |key, value|
           next unless key.is_a?(String)
           if type = k2t[key]?
             regex = t2r[type]
@@ -73,7 +73,7 @@ module HelpParser
 
     def pad
       # Synonyms and defaults:
-      hash = @options.hash!
+      hash = @options.to_h
       @specs.each do |section, options|
         next if section == USAGE || section == TYPES
         options.each do |words|
@@ -110,7 +110,7 @@ module HelpParser
     end
 
     def matches(cmd : Array(Token), i : UInt8 = 0_u8) : UInt8
-      keys = @options.hash!.keys
+      keys = @options.to_h.keys
       cmd.each do |token|
         if token.is_a?(Array(Token))
           begin

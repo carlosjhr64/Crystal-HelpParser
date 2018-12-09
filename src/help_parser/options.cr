@@ -97,7 +97,7 @@ module HelpParser
       @hash["debug"]? == true
     end
 
-    def hash!
+    def to_h
       @hash
     end
   end

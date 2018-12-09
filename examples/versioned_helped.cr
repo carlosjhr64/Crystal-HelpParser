@@ -8,4 +8,4 @@ HELP = <<-HELP
 HELP
 
 OPTIONS = HelpParser[VERSION, HELP]
-puts OPTIONS.hash!.to_json
+puts OPTIONS.to_h.to_json

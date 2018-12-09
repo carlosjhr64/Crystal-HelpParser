@@ -240,4 +240,4 @@ HELPS = [
 
 N = (ARGV.size>0)? ARGV[0].to_i : 0
 OPTIONS = HelpParser["1.2.3", HELPS[index]]
-puts OPTIONS.hash!.to_json
+puts OPTIONS.to_h.to_json

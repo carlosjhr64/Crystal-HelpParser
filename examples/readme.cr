@@ -40,7 +40,7 @@ HelpParser.sbool?(bool)  # for options.bool?  : Bool
 HelpParser.cbool?(b)     # for options.b?     : Bool
 
 HelpParser.run(VERSION, HELP, ["awesome"]+ARGV) do |options|
-  hash = options.hash!
+  hash = options.to_h
   pp hash # to inspect the hash
 
   pp options.name  if hash["name"]?

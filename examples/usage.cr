@@ -9,4 +9,4 @@ Usage:
 HELP
 
 OPTIONS = HelpParser[help: HELP]
-puts OPTIONS.hash!.to_json
+puts OPTIONS.to_h.to_json
