@@ -60,10 +60,14 @@ module HelpParser
     {% end %}
   end
 
+  private macro f2s(f)
+    ({{f.id}}[1]=='-')? {{f.id}}[2..(({{f.id}}.index('=')||0)-1)] : {{f.id}}.lchop
+  end
+
   macro validate_usage_specs
     {% if !flag?(:release) %}
       option_specs = specs.select{|a,b| !HelpParser.reserved(a)}
-      flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{|f|HelpParser.f2s(f)}
+      flags = option_specs.values.flatten.select{|f|f[0]=='-'}.map{ |f| f2s(f) }
       if exclusive = specs[EXCLUSIVE]?
         seen = Set(String).new
         exclusive.each do |xs|

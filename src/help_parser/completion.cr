@@ -109,6 +109,10 @@ module HelpParser
       end
     end
 
+    private macro f2k(f)
+      ({{f.id}}[1]=='-')? {{f.id}}[2..(({{f.id}}.index('=')||0)-1)] : {{f.id}}[1]
+    end
+
     def matches(cmd : Array(Token), i : UInt8 = 0_u8) : UInt8
       keys = @options.to_h.keys
       cmd.each do |token|
@@ -123,7 +127,7 @@ module HelpParser
           group, plus = m["k"], m["p"]?
           key = keys[i]?
           raise NoMatch.new if key.nil? || key.is_a?(UInt8)
-          list = @specs[group].flatten.select { |f| f[0] == '-' }.map { |f| HelpParser.f2k(f) }
+          list = @specs[group].flatten.select { |f| f[0] == '-' }.map { |f| f2k(f) }
           raise NoMatch.new unless list.includes?(key)
           unless plus.nil?
             loop do
